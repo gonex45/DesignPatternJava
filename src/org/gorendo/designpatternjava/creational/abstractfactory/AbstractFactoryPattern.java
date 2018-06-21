@@ -8,7 +8,7 @@ public class AbstractFactoryPattern {
     }
 
     private void action() {
-        GuiFactory guiFactory = GuiFactory.getFactory(OS.OSX);
+        GuiFactory guiFactory = GuiFactory.getFactory(Os.OSX);
         Button button = guiFactory.createButton();
         button.show();
     }
@@ -17,12 +17,12 @@ public class AbstractFactoryPattern {
 
 abstract class GuiFactory {
 
-    static GuiFactory getFactory(OS typeOS) {
-        switch (typeOS) {
+    static GuiFactory getFactory(Os typeOs) {
+        switch (typeOs) {
             case OSX:
-                return new OSXFactory();
+                return new OsxFactory();
             default:
-                throw new RuntimeException("Not Implement:" + typeOS);
+                throw new RuntimeException("Not Implement:" + typeOs);
         }
     }
 
@@ -35,10 +35,10 @@ interface Button {
     void show();
 }
 
-class OSXButton implements Button {
+class OsxButton implements Button {
 
     public void show() {
-        System.out.print("I'm OSXButton");
+        System.out.print("I'm OsxButton");
     }
 }
 
@@ -50,14 +50,14 @@ class WinButton implements Button {
 }
 
 
-class OSXFactory extends GuiFactory {
+class OsxFactory extends GuiFactory {
 
     @Override
     public Button createButton() {
-        return new OSXButton();
+        return new OsxButton();
     }
 }
 
-enum OS {
+enum Os {
     OSX, Win
 }
